@@ -1,0 +1,12 @@
+{
+  "product": [
+    {
+      "id": "1",
+      "title": "test product",
+      "price": 13.5,
+      "description": "lorem ipsum set",
+      "image": "https://placehold.co/600x400/png",
+      "category": "electronic"
+    }
+  ]
+}
