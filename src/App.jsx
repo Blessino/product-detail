@@ -1,35 +1,67 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [product, setProduct] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  function itemAdd() {
+    setCount((count)=> count + 1);
+  }
+  function itemSubtract() {
+    setCount((count)=> count - 1);
+  }
+
+  useEffect(function () {
+    async function productDetail() {
+      try {
+        setIsLoading(true);
+        const res = await fetch("http://localhost:8000/product");
+        if (!res.ok) throw new Error("error");
+        const data = await res.json();
+        setProduct(data);
+        console.log();
+        setIsLoading(false);
+      } catch (err) {
+        setIsLoading(false);
+        console.error(err.message);
+        setError(err.message);
+      }
+    }
+
+    productDetail();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <main>
+      <h1>Product Detail</h1>
+
+      <section className="card">
+        {isLoading && <p>Loading</p>}
+
+        {!isLoading &&
+          !error &&
+          product.map((item) => (
+            <li key={item.id} className="product">
+              <figure className="image">
+                <img src={item.image} alt={item.image}/>
+              </figure>
+              <div>
+                <h4>{item.category}</h4>
+                <p>Product Name: {item.title}</p>
+                <p>price: {item.price}</p>
+                <button onClick={itemAdd} >+</button>{`count is ${count}`}<button onClick={itemSubtract} >-</button>
+                <p>(item.description)</p>
+              </div>
+            </li>
+          ))}
+
+        {error && <p>{error}</p>}
+      </section>
+    </main>
+  );
 }
 
-export default App
+export default App;
