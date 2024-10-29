@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   const [product, setProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -11,6 +11,7 @@ function App() {
     setCount((count)=> count + 1);
   }
   function itemSubtract() {
+    if(count <= 1) return
     setCount((count)=> count - 1);
   }
 
@@ -44,16 +45,19 @@ function App() {
         {!isLoading &&
           !error &&
           product.map((item) => (
-            <li key={item.id} className="product">
-              <figure className="image">
-                <img src={item.image} alt={item.image}/>
+            <li key={item.id} className="card_product">
+              <figure className="card_product-image">
+                <img src={item.image} alt={item.image} />
               </figure>
-              <div>
-                <h4>{item.category}</h4>
-                <p>Product Name: {item.title}</p>
-                <p>price: {item.price}</p>
-                <button onClick={itemAdd} >+</button>{`count is ${count}`}<button onClick={itemSubtract} >-</button>
-                <p>(item.description)</p>
+              <div className="card_product-detail">
+                <h4 className="card_product-category" >{item.category}</h4>
+                <p ><span className="card_product-title" >Product Name:</span> {item.title}</p>
+                <p className="card_product-price" >price: {item.price}</p>
+                <span className="quantity">quantity</span>
+                <button onClick={itemAdd} >+</button>
+                  <span className="count">{count}</span>
+                <button onClick={itemSubtract} >-</button>
+                <p>{item.description}</p>
               </div>
             </li>
           ))}
