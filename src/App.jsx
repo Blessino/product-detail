@@ -37,8 +37,6 @@ function App() {
 
   return (
     <main>
-      <h1>Product Detail</h1>
-
       <section className="card">
         {isLoading && <p>Loading</p>}
 
@@ -50,14 +48,22 @@ function App() {
                 <img src={item.image} alt={item.image} />
               </figure>
               <div className="card_product-detail">
-                <h4 className="card_product-category" >{item.category}</h4>
-                <p ><span className="card_product-title" >Product Name:</span> {item.title}</p>
-                <p className="card_product-price" >price: {item.price}</p>
-                <span className="quantity">quantity</span>
-                <button onClick={itemAdd} >+</button>
-                  <span className="count">{count}</span>
-                <button onClick={itemSubtract} >-</button>
-                <p>{item.description}</p>
+                <h6 className="card_product-category" >{item.category}</h6>
+
+                <h3 className="product-detail">{item.title}</h3>
+                <p className="product-lable"><span className="product-brand">brand: {item.brand}</span> <span>rating: {item.rating}</span></p>
+                <h5 className="product-detail" ><span>price:</span> Rs.{item.price}</h5>
+                <span className="product-detail">quantity</span>
+                <div className="stock-btn">
+
+                <button onClick={itemAdd} className="stok-btn" >+ </button>
+                  <span className="product-count">{count}</span>
+                <button onClick={itemSubtract} > -</button>
+                <span className="stok">stok: {item.stok}</span>
+                </div>
+                <button>Add to Cart</button>
+                
+                <p><span className="product-detail">discription: </span>{item.description}</p>
               </div>
             </li>
           ))}

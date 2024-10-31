@@ -3,9 +3,12 @@
     {
       "id": "1",
       "title": "test product",
+      "brand": "test brand",
+      "rating": 4.5,
       "price": 13.5,
+      "stok": 10,
       "description": "lorem ipsum set",
-      "image": "https://placehold.co/600x400/png",
+      "image": "https://placehold.co/320x240/png",
       "category": "electronic"
     }
   ]
