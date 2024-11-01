@@ -47,13 +47,9 @@ main{
   border-radius: 50px;
 }
 
-.card_product-detail{
- padding-left: 5rem;
-}
-
 .product-detail{
   text-transform: uppercase;
-  padding-right: 1em;
+  padding-right: 1rem;
   margin-bottom: 0.1em;
 }
 
@@ -81,4 +77,21 @@ main{
   background-color: rgba(220, 220, 220, 0.758);
   border-radius: 10px;
   margin-bottom: 1rem;
+}
+
+@media ( max-width: 1080px )
+ {
+  .card_product-detail{
+    margin-left: 5em;
+   }
+}
+@media ( max-width: 890px )
+ {
+  .card_product{
+    flex-direction: column;
+    /* align-items: left; */
+  }
+  .card_product-detail{
+    margin-left: 1em;
+   }
 }
